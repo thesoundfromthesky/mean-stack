@@ -1,0 +1,17 @@
+.post-show-card {
+  // border: 5px solid red;
+  max-width: 500px;
+  margin: 5px auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-input-element:disabled {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+textarea {
+  overflow: hidden;
+}

@@ -1,0 +1,57 @@
+[mat-fab] {
+  position: absolute;
+  right: 1%;
+  z-index: 1;
+}
+
+.chat-container {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  // border: 5px solid springgreen;
+  height: 90vh;
+}
+
+.main-card {
+  flex: 1;
+}
+
+.chat-list {
+  overflow: auto;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  right: 25px;
+  bottom: 100px;
+  border: 1px solid orangered;
+}
+
+.chat-list-item {
+  margin-top: 2px;
+  margin-bottom: 2px;
+  border-radius: 5px;
+  background-color: #e8eaf6;
+}
+
+.chat-message {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.chat-notification {
+  text-align: center;
+}
+
+.chat-footer-container {
+  position: absolute;
+  bottom: 25px;
+  left: 25px;
+  width: 80%;
+  display: flex;
+  align-items: baseline;
+}
+
+.mat-form-field {
+  flex: 1;
+  margin-left: 10px;
+}

@@ -1,0 +1,16 @@
+.post-new-card {
+  max-width: 500px;
+  margin: 5px auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-input-element:disabled {
+  color: rgba(0, 0, 0, 0.87) !important;
+}
+
+textarea {
+  overflow: hidden;
+}

@@ -1,0 +1,80 @@
+<mat-card class="post-show-card mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>Post Info</mat-card-title>
+    <mat-card-subtitle>detailed</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <mat-form-field>
+        <mat-label><mat-icon>title</mat-icon> <span>Title</span></mat-label>
+        <textarea
+          matInput
+          matTextareaAutosize="true"
+          [value]="post.title"
+          disabled
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label
+          ><mat-icon>perm_identity</mat-icon> <span>Author</span></mat-label
+        >
+        <textarea
+          matInput
+          matTextareaAutosize="true"
+          [value]="post.author.username"
+          disabled
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label><mat-icon>subject</mat-icon><span>Body</span></mat-label>
+        <textarea
+          matInput
+          matTextareaAutosize="true"
+          matAutosizeMinRows="15"
+          [value]="post.body"
+          disabled
+        ></textarea>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Created Date</mat-label>
+        <input matInput [value]="post.createdDate" disabled />
+        <span matPrefix><mat-icon>history</mat-icon></span>
+      </mat-form-field>
+    </p>
+    <p *ngIf="post.updatedDate">
+      <mat-form-field>
+        <mat-label>Updated Date</mat-label>
+        <input matInput [value]="post.updatedDate" disabled />
+        <span matPrefix><mat-icon>update</mat-icon></span>
+      </mat-form-field>
+    </p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="goBack()">
+      <mat-icon>send</mat-icon>
+      <span>Back</span>
+    </button>
+    <ng-container *ngIf="authService.getCurrentUser()?._id == post.author._id">
+      <button mat-raised-button (click)="deletePost()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+      <a
+        mat-raised-button
+        [routerLink]="['/post', 'edit', post._id]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ><mat-icon>build</mat-icon>
+        <span>Edit</span>
+      </a>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>
+
+<app-comment></app-comment>

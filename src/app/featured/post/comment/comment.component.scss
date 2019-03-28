@@ -1,0 +1,31 @@
+.comment-list-card {
+  max-width: 500px;
+  margin: 5px auto;
+}
+
+.mat-list-item {
+  height: auto !important;
+  padding: 10px !important;
+}
+
+.memo {
+  word-wrap: break-word !important;
+  white-space: pre-wrap !important;
+}
+
+.comment-create-card {
+  max-width: 500px;
+  margin: 5px auto;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+textarea {
+  overflow: hidden;
+}
+
+.hidden {
+  visibility: hidden;
+}

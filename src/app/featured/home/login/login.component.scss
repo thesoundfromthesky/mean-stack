@@ -1,0 +1,25 @@
+.flex-container {
+  display: flex;
+  padding: 1%;
+}
+
+.fill-remaining-space {
+  flex: 1;
+}
+
+.container {
+  // border: 5px solid pink;
+  background-color: #324851;
+  height: calc(100% - 5px);
+  padding-top: 5px;
+}
+
+form {
+  background-color: white;
+  max-width: 500px;
+  margin: auto;
+}
+
+mat-form-field {
+  width: 100%;
+}

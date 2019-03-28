@@ -1,0 +1,166 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav [autoFocus]="false" #sidenav class="main-sidenav">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span mat-line>Home</span>
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/user', 'list']"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+        <span mat-line>User</span>
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/post', 'list']"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>forum</mat-icon>
+        <span mat-line>Forum</span>
+      </a>
+      <a
+        mat-list-item
+        [routerLink]="['/chat']"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>chat</mat-icon>
+        <span mat-line>Chat</span>
+      </a>
+      <a
+      mat-list-item
+      [routerLink]="['/arkanoid']"
+      routerLinkActive="active"
+      (click)="sidenav.close()"
+    >
+      <mat-icon mat-list-icon>videogame_asset</mat-icon>
+      <span mat-line>Arkanoid</span>
+    </a>
+      <a
+        mat-list-item
+        [routerLink]="['/']"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>adb</mat-icon>
+        <span mat-line>TBD</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" #toolbar class="main-toolbar show-toolbar">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Sample Project</span>
+      <span class="fill-remaining-space"></span>
+      <ng-container *ngIf="!authService.isLoggedIn()">
+        <a
+          mat-raised-button
+          color="accent"
+          class="button-raised"
+          [routerLink]="['/user', 'new']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="sidenav.close()"
+          ><mat-icon>fiber_new</mat-icon>
+          <span>SignUp</span>
+        </a>
+        <a
+          mat-icon-button
+          class="button-icon"
+          [routerLink]="['/user', 'new']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="sidenav.close()"
+          ><mat-icon>fiber_new</mat-icon>
+        </a>
+        <a
+          mat-raised-button
+          color="accent"
+          class="button-raised"
+          [routerLink]="['/login']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="sidenav.close()"
+          ><mat-icon>vpn_key</mat-icon>
+          <span>Login</span>
+        </a>
+        <a
+          mat-icon-button
+          class="button-icon"
+          [routerLink]="['/login']"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="sidenav.close()"
+          ><mat-icon>vpn_key</mat-icon>
+        </a>
+      </ng-container>
+      <ng-container *ngIf="authService.getCurrentUser()">
+        <a
+          mat-raised-button
+          color="accent"
+          class="button-raised"
+          [routerLink]="['/user', authService.getCurrentUser().username]"
+          (click)="sidenav.close()"
+          ><mat-icon>info</mat-icon>
+          <span>Me</span>
+        </a>
+        <a
+          mat-icon-button
+          class="button-icon"
+          [routerLink]="['/user', authService.getCurrentUser().username]"
+          (click)="sidenav.close()"
+          ><mat-icon>info</mat-icon>
+        </a>
+        <a
+          mat-raised-button
+          color="accent"
+          class="button-raised"
+          (click)="authService.logout()"
+          (click)="sidenav.close()"
+          ><mat-icon>touch_app</mat-icon>
+          <span>Logout</span>
+        </a>
+        <a mat-icon-button class="button-icon" (click)="authService.logout()"
+          ><mat-icon>touch_app</mat-icon>
+        </a>
+      </ng-container>
+      <span style="margin-right:5px"></span>
+    </mat-toolbar>
+    <div class="fill"></div>
+    <mat-progress-bar
+      *ngIf="isLoading"
+      mode="indeterminate"
+      class="loading-bar"
+    ></mat-progress-bar>
+    <div class="grid-content-container">
+      <main class="app-content">
+        <router-outlet></router-outlet>
+      </main>
+      <aside class="ad-content">
+        <img
+          class="img"
+          alt="sample image"
+          src="https://images.pexels.com/photos/1437587/pexels-photo-1437587.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        />
+      </aside>
+      <aside class="counter"><app-counter></app-counter></aside>
+      <footer class="footer-content">
+        <span>This is footer </span>
+      </footer>
+    </div>
+    <app-message></app-message>
+  </mat-sidenav-content>
+</mat-sidenav-container>

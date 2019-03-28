@@ -1,0 +1,57 @@
+mat-form-field {
+  margin: 3px;
+  width: 80%;
+}
+
+table {
+  // border: 3px solid brown;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.post-list-card {
+  margin: 3px;
+  // border: 3px solid yellow;
+}
+
+.table-mobile {
+  display: initial;
+}
+
+.table-desktop {
+  display: none;
+}
+
+.mat-column-index {
+  width: 50px;
+}
+
+.mat-column-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mat-column-author {
+  width: 100px;
+}
+
+.mat-column-views {
+  width: 50px;
+}
+
+.flex-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 599px) {
+  .table-desktop {
+    display: initial;
+  }
+
+  .table-mobile {
+    display: none;
+  }
+}

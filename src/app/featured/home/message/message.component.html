@@ -1,0 +1,12 @@
+<ng-container *ngIf="isDev">
+  <h2>
+    Messages
+    <button mat-raised-button color="primary" (click)="messageService.clear()">
+      <mat-icon>delete</mat-icon>
+      <span>Clear</span>
+    </button>
+  </h2>
+  <div *ngFor="let message of messageService.messages; let i = index">
+    ({{ i + 1 }}){{ message }}
+  </div>
+</ng-container>

@@ -1,0 +1,63 @@
+<mat-card class="id-card mat-elevation-z8">
+  <mat-card-header>
+    <mat-card-title>User Info</mat-card-title>
+    <mat-card-subtitle>detailed</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput [value]="user.username" disabled />
+        <span matPrefix><mat-icon>account_circle</mat-icon></span>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [value]="user.name" disabled />
+        <span matPrefix><mat-icon>perm_identity</mat-icon></span>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input matInput [value]="user.email" disabled />
+        <span matPrefix><mat-icon>email</mat-icon></span>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field>
+        <mat-label>Created Date</mat-label>
+        <input matInput [value]="user.createdDate" disabled />
+        <span matPrefix><mat-icon>history</mat-icon></span>
+      </mat-form-field>
+    </p>
+    <p *ngIf="user.updatedDate">
+      <mat-form-field>
+        <mat-label>Updated Date</mat-label>
+        <input matInput [value]="user.updatedDate" disabled />
+        <span matPrefix><mat-icon>update</mat-icon></span>
+      </mat-form-field>
+    </p>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-raised-button (click)="goBack()">
+      <mat-icon>send</mat-icon>
+      <span>Back</span>
+    </button>
+    <ng-container *ngIf="authService.getCurrentUser()?._id == user._id">
+      <button mat-raised-button (click)="deleteUser()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+      <a
+        mat-raised-button
+        [routerLink]="['/user', 'edit', user.username]"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ><mat-icon>build</mat-icon>
+        <span>Edit</span>
+      </a>
+    </ng-container>
+  </mat-card-actions>
+</mat-card>
