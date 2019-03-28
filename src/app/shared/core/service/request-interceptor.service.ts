@@ -10,12 +10,12 @@ import {
 } from "@angular/common/http";
 
 import { Observable, of } from "rxjs";
-import { tap } from 'rxjs/operators';
+import { tap } from "rxjs/operators";
 
-import { RequestCacheService } from './request-cache.service';
+import { RequestCacheService } from "./request-cache.service";
 
 @Injectable()
-export class RequestInterceptorService implements HttpInterceptor{
+export class RequestInterceptorService implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -36,14 +36,21 @@ export class CachingInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const cachedResponse = this.cache.get(req);
-    return cachedResponse ? of(cachedResponse) : this.sendRequest(req, next, this.cache);
+    if (req.method === "GET") {
+      const cachedResponse = this.cache.get(req);
+      return cachedResponse
+        ? of(cachedResponse)
+        : this.sendRequest(req, next, this.cache);
+    } else {
+      return next.handle(req);
+    }
   }
 
   sendRequest(
     req: HttpRequest<any>,
     next: HttpHandler,
-    cache: RequestCacheService): Observable<HttpEvent<any>> {
+    cache: RequestCacheService
+  ): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       tap(event => {
         if (event instanceof HttpResponse) {

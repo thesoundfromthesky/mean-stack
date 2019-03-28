@@ -181,6 +181,7 @@ export class ArkanoidComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       if (-1 < idx) {
+        this.updateTouchPoint(this.ongoingTouches[idx]);
         this.updateTouchPoint(touch);
         this.ongoingTouches.splice(idx, 1, this.generateTouch(touch));
       }
@@ -202,15 +203,23 @@ export class ArkanoidComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   generateTouch(touch: Touch): object {
+    let ratio: number =
+      this.canvas.nativeElement.width /
+      this.canvas.nativeElement.getBoundingClientRect().width;
     return {
       identifier: touch.identifier,
-      clientX: touch.clientX,
-      clientY: touch.clientY
+      clientX: touch.clientX * ratio,
+      clientY: touch.clientY * ratio
     };
   }
 
   updateTouchPoint(touch: Touch): void {
-    let relativeX = touch.clientX - this.canvas.nativeElement.offsetLeft;
+    let ratio: number =
+      this.canvas.nativeElement.width /
+      this.canvas.nativeElement.getBoundingClientRect().width;
+
+    let relativeX =
+      touch.clientX * ratio - this.canvas.nativeElement.offsetLeft;
     if (0 < relativeX && relativeX < this.canvas.nativeElement.width) {
       this.paddleX = relativeX - this.paddleWidth / 2;
       if (this.paddleX < 0) {
