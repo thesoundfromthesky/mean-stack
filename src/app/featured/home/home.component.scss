@@ -122,9 +122,11 @@
       "app ad"
       "app counter"
       "footer footer";
-    grid-template-columns: 10fr 2fr;
+    grid-template-columns: [app-start]10fr[app-end] 2fr;
     grid-template-rows:
+      [app-start]
       1fr
+      [app-end]
       auto
       70px;
   }
