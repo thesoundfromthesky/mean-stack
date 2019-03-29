@@ -14,29 +14,28 @@ import { Counter } from "../model/counter";
 export class CounterService {
   readonly apiBaseUrl: string = `${environment.apiBaseUrl}/counters`;
 
-  constructor(
-    private http: HttpClient,
-    private utilService: UtilService
-  ) {}
+  constructor(private http: HttpClient, private utilService: UtilService) {}
 
   getCounter(): Observable<Counter> {
-    return this.http.get<ApiResponse>(this.apiBaseUrl).pipe(
-      retry(3),
-      debounceTime(300),
-      tap(response => {
-        this.utilService.checkSuccess(response);
-        this.utilService.log(`${this.constructor.name} : getCounter success`);
-      }),
-      map(response => {
-        return response.data as Counter;
-      }),
-      catchError(error =>
-        this.utilService.handleApiError(
-          this.constructor.name,
-          "getCounter",
-          error
+    return this.http
+      .get<ApiResponse>(this.apiBaseUrl)
+      .pipe(
+        retry(3),
+        debounceTime(300),
+        tap(response => {
+          this.utilService.checkSuccess(response);
+          this.utilService.log(`${this.constructor.name} : getCounter success`);
+        }),
+        map(response => {
+          return response.data as Counter;
+        }),
+        catchError(error =>
+          this.utilService.handleApiError(
+            this.constructor.name,
+            "getCounter",
+            error
+          )
         )
-      )
-    );
-  }  
+      );
+  }
 }

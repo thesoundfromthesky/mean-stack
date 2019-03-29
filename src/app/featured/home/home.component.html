@@ -39,14 +39,14 @@
         <span mat-line>Chat</span>
       </a>
       <a
-      mat-list-item
-      [routerLink]="['/arkanoid']"
-      routerLinkActive="active"
-      (click)="sidenav.close()"
-    >
-      <mat-icon mat-list-icon>videogame_asset</mat-icon>
-      <span mat-line>Arkanoid</span>
-    </a>
+        mat-list-item
+        [routerLink]="['/arkanoid']"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+      >
+        <mat-icon mat-list-icon>videogame_asset</mat-icon>
+        <span mat-line>Arkanoid</span>
+      </a>
       <a
         mat-list-item
         [routerLink]="['/']"
@@ -140,11 +140,9 @@
       <span style="margin-right:5px"></span>
     </mat-toolbar>
     <div class="fill"></div>
-    <mat-progress-bar
-      *ngIf="isLoading"
-      mode="indeterminate"
-      class="loading-bar"
-    ></mat-progress-bar>
+    <div class="loading-bar" *ngIf="isLoading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
     <div class="grid-content-container">
       <main class="app-content">
         <router-outlet></router-outlet>

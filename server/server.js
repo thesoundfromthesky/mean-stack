@@ -7,6 +7,7 @@ var express_1 = __importDefault(require("express"));
 var body_parser_1 = __importDefault(require("body-parser"));
 var http_1 = __importDefault(require("http"));
 var socket_io_1 = __importDefault(require("socket.io"));
+var cookie_parser_1 = __importDefault(require("cookie-parser"));
 var path_1 = __importDefault(require("path"));
 var auth_1 = require("./api/auth");
 var users_1 = require("./api/users");
@@ -45,6 +46,7 @@ var App = (function () {
         this.app.use(body_parser_1.default.urlencoded({
             extended: true
         }));
+        this.app.use(cookie_parser_1.default());
         this.app.use(function (req, res, next) {
             res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");

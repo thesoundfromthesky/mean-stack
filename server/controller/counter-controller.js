@@ -13,35 +13,47 @@ var CounterController = (function () {
         var _this = this;
         var now = new Date();
         var date = now.getFullYear() + "/" + (now.getMonth() + 1) + "/" + now.getDate();
-        Counter_1.counterDocument
-            .findOne({ name: "vistors" })
-            .then(function (counter) {
-            if (!counter) {
-                Counter_1.counterDocument.create({
-                    name: "vistors",
-                    totalCount: 1,
-                    todayCount: 1,
-                    date: date
-                });
-            }
-            else {
-                counter.totalCount++;
-                if (counter.date == date) {
-                    counter.todayCount++;
+        if (date != req.cookies.countDate) {
+            res.cookie("countDate", date, { maxAge: 86400000, httpOnly: true });
+            Counter_1.counterDocument
+                .findOne({ name: "vistors" })
+                .then(function (counter) {
+                if (!counter) {
+                    Counter_1.counterDocument.create({
+                        name: "vistors",
+                        totalCount: 1,
+                        todayCount: 1,
+                        date: date
+                    });
                 }
                 else {
-                    counter.todayCount = 1;
-                    counter.date = date;
+                    counter.totalCount++;
+                    if (counter.date == date) {
+                        counter.todayCount++;
+                    }
+                    else {
+                        counter.todayCount = 1;
+                        counter.date = date;
+                    }
+                    counter.save().then(function (counter) {
+                        return res.json(_this.util.successTrue(counter));
+                    });
                 }
-                counter.save().then(function (counter) {
-                    console.log(counter);
-                    return res.json(_this.util.successTrue(counter));
-                });
-            }
-        })
-            .catch(function (err) {
-            res.json(_this.util.successFalse(err));
-        });
+            })
+                .catch(function (err) {
+                res.json(_this.util.successFalse(err));
+            });
+        }
+        else {
+            Counter_1.counterDocument
+                .findOne({ name: "vistors" })
+                .then(function (counter) {
+                return res.json(_this.util.successTrue(counter));
+            })
+                .catch(function (err) {
+                res.json(_this.util.successFalse(err));
+            });
+        }
     };
     return CounterController;
 }());
